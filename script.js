@@ -1,6 +1,10 @@
 const searchBtn = document.querySelector(".searchBtn");
 const searchInput = document.querySelector(".searchInput");
 const displayCon = document.querySelector(".display-container");
+const celciusBtn = document.querySelector(".celcius");
+const fahrenheitBtn = document.querySelector(".fahrenheit");
+let celV;
+let fahV;
 searchBtn.addEventListener('click', function(){
     async function getData(){
         try{
@@ -8,9 +12,14 @@ searchBtn.addEventListener('click', function(){
             displayCon.textContent = "";
             let newT = document.createElement("div");
             let data = await response.json(); 
-            newT.textContent = "the tempature is: " + data.main.temp;
+            newT.textContent = "the tempature(kelvin) is: " + data.main.temp;
+            celV = Math.floor(data.main.temp - 273.15);
+            fahV = Math.floor(celV*9/5 + 32);
+            
             displayCon.appendChild(newT);
         } catch{
+            celV = undefined;
+            fahV = undefined;
             let newT = document.createElement("div");
             newT.textContent = "city not found";
             displayCon.appendChild(newT)
@@ -18,4 +27,22 @@ searchBtn.addEventListener('click', function(){
 
     }
     getData();
+});
+celciusBtn.addEventListener('click', function(){
+    displayCon.textContent = "";
+    let newT = document.createElement('div');
+    newT.textContent = "the tempature(celcius) is: " + celV;
+    if(celV == undefined || celV == null){
+        newT.textContent = "city not found";
+    }
+    displayCon.appendChild(newT);
+});
+fahrenheitBtn.addEventListener('click', function(){
+    displayCon.textContent = "";
+    let newT = document.createElement('div');
+    newT.textContent = "the tempature(celcius) is: " + fahV;
+    if(fahV == undefined || fahV == null){
+        newT.textContent = "city not found";
+    }
+    displayCon.appendChild(newT);
 });
