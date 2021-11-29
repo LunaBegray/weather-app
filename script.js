@@ -40,7 +40,7 @@ celciusBtn.addEventListener('click', function(){
 fahrenheitBtn.addEventListener('click', function(){
     displayCon.textContent = "";
     let newT = document.createElement('div');
-    newT.textContent = "the tempature(celcius) is: " + fahV;
+    newT.textContent = "the tempature(fahrenheit) is: " + fahV;
     if(fahV == undefined || fahV == null){
         newT.textContent = "city not found";
     }
